@@ -1,0 +1,26 @@
+#cloud-config
+
+package_update: true
+
+packages:
+  - nginx
+  - git
+
+write_files:
+  - path: /usr/share/nginx/html/index.html
+    permissions: '0644'
+    content: |
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>DevOps Project</title>
+        </head>
+        <body>
+          <h1>Welcome to my DevOps project!</h1>
+          <p>Deployed using Terraform and Cloud-Init.</p>
+        </body>
+      </html>
+
+runcmd:
+  - systemctl enable nginx
+  - systemctl start nginx
